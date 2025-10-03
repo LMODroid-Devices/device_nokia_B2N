@@ -18,9 +18,6 @@ from extract_utils.main import (
     ExtractUtilsModule,
 )
 
-import extract_utils.tools
-extract_utils.tools.DEFAULT_PATCHELF_VERSION = '0_9'
-
 namespace_imports = [
     'device/nokia/sdm660-common',
     'hardware/qcom-caf/msm8998',
@@ -30,10 +27,10 @@ namespace_imports = [
 
 blob_fixups: blob_fixups_user_type = {
     'vendor/lib/hw/camera.sdm660.so': blob_fixup()
-	.remove_needed('libMegviiFacepp.so')
-	.remove_needed('libmegface-new.so')
-	.add_needed('libshim_megvii.so')
-	.add_needed('libui_shim.so'),
+        .remove_needed('libMegviiFacepp.so')
+        .remove_needed('libmegface-new.so')
+        .add_needed('libshim_megvii.so')
+        .add_needed('libui_shim.so'),
     ('vendor/lib/libmmcamera_faceproc.so', 'vendor/lib/libmmcamera_faceproc2.so'): blob_fixup()
         .clear_symbol_version('__aeabi_memcpy')
         .clear_symbol_version('__aeabi_memset')
